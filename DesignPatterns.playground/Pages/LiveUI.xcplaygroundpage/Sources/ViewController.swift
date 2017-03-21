@@ -2,7 +2,15 @@ import UIKit
 
 public class ViewController: UIViewController {
 
-    private let countLabel: UILabel = UILabel(frame: CGRect.zero)
+    lazy private var countLabel: UILabel = {
+        let label = UILabel(frame: CGRect.zero)
+        label.layer.borderColor = UIColor.gray.cgColor
+        label.layer.borderWidth = 1.0
+        label.layer.cornerRadius = 5.0
+        label.layer.masksToBounds = true
+        label.textAlignment = .center
+        return label
+    }()
     
     public private(set) var count: Int = 0 {
         didSet {
@@ -33,29 +41,26 @@ public class ViewController: UIViewController {
         view.addSubview(countLabel)
         countLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        let views = ["button" : button,
-                     "countLabel" : countLabel]
-        let horizontalFormatStringButton = "H:|-[button]-|"
+        let labelHorizontal = NSLayoutConstraint(item: countLabel, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1.0, constant: 0)
+        let labelWidth = NSLayoutConstraint(item: countLabel, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1, constant: 100)
+        let labelHeight = NSLayoutConstraint(item: countLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1, constant: 50)
+        let labelVertical = NSLayoutConstraint(item: countLabel, attribute: .bottom, relatedBy: .equal, toItem: button, attribute: .top, multiplier: 1, constant: 0)
         
-        let horizontalConstraintsButton = NSLayoutConstraint.constraints(withVisualFormat: horizontalFormatStringButton,
-                                                         options:[] ,
-                                                         metrics: nil,
-                                                         views: ["button" : button])
-        let horizontalFormatStringLabel = "H:|-(150)-[countLabel(100@1000)]-|"
-        let horizontalConstraintsLabel = NSLayoutConstraint.constraints(withVisualFormat: horizontalFormatStringLabel,
-                                                                   options:[] ,
-                                                                   metrics: nil,
-                                                                   views: ["countLabel" : countLabel])
+        let buttonHorizontal = NSLayoutConstraint(item: button, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1.0, constant: 0)
+        let buttonVertical = NSLayoutConstraint(item: button, attribute: .centerY, relatedBy: .equal, toItem: view, attribute: .centerY, multiplier: 1.0, constant: 0)
+        let buttonWidth = NSLayoutConstraint(item: button, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1, constant: 100)
+        let buttonHeight = NSLayoutConstraint(item: button, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1, constant: 50)
         
-        let verticalFormatString = "V:|-[countLabel(50)]-(10@1000)-[button]-|"
-        let verticalConstraints = NSLayoutConstraint.constraints(withVisualFormat: verticalFormatString,
-                                                         options:[] ,
-                                                         metrics: nil,
-                                                         views: views)
-
-        view.addConstraints([horizontalConstraintsButton,
-                             horizontalConstraintsLabel,
-                             verticalConstraints].flatMap { $0 })
+        view.addConstraints([
+            labelHorizontal,
+            labelVertical,
+            labelWidth,
+            labelHeight,
+            buttonHorizontal,
+            buttonVertical,
+            buttonWidth,
+            buttonHeight
+            ])
 
         view.backgroundColor = UIColor.white
         
