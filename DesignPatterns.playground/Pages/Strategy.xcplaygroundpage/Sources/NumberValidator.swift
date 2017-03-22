@@ -1,3 +1,5 @@
+// Wayne
+
 import Foundation
 
 public class MyNumber: Value {
