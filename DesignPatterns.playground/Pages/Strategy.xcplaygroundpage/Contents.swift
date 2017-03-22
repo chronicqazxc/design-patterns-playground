@@ -7,8 +7,6 @@
  * makes the algorithms interchangeable within that family.
  
  ![Design](Strategy_Pattern_in_UML.png)
- 
- Wayne 21 Mar 2017
  */
 
 import UIKit

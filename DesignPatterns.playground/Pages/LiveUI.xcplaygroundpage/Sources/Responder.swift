@@ -1,3 +1,5 @@
+// Wayne
+
 import Foundation
 
 public typealias ClickBlock = (AnyObject)->()
