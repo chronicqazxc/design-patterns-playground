@@ -4,5 +4,6 @@
         <page name='Strategy'/>
         <page name='State'/>
         <page name='LiveUI'/>
+        <page name='Bridge'/>
     </pages>
 </playground>
