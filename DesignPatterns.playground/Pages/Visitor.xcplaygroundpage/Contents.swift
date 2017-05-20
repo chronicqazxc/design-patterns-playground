@@ -39,7 +39,7 @@ totalRun += 5000
 car.accept(repair: WheelRepair())
 car.accept(repair: DoorRepair())
 
-print("After repair")
+print("Repaired")
 car.status()
 print("\n")
 
